@@ -1,41 +1,35 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
-
+import React, { useEffect } from 'react';
+import Home from './pages/home';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/navBar';
+import { gapi } from 'gapi-script';
+import Login from './pages/login';
+import { useSelector } from 'react-redux';
 function App() {
+  const { user } = useSelector(state => state.login);
+  const googleClientID =
+    '1094987803842-lndm8ge3sb7m9ppd2m06as5dk1jcghpm.apps.googleusercontent.com';
+
+  useEffect(() => {
+    gapi.load('client:auth2', () => {
+      gapi.client.init({
+        clientId: googleClientID,
+      });
+    });
+  }, []);
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
+    <>
+      {!user.accessToken ? (
+        <Login />
+      ) : (
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </>
+      )}
+    </>
   );
 }
 
