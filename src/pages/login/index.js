@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
@@ -10,11 +10,24 @@ const Login = () => {
     '1094987803842-lndm8ge3sb7m9ppd2m06as5dk1jcghpm.apps.googleusercontent.com';
 
   const responseGoogle = response => {
-    dispatch(userLogin({accessToken:response.accessToken,profile:response.profileObj}));
+    dispatch(
+      userLogin({
+        accessToken: response.accessToken,
+        profile: response.profileObj,
+      })
+    );
   };
 
   return (
-    <Box>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection='column'
+      h="100vh"
+      bg='blackAlpha.400'
+    >
+      <Text fontSize='45px' color='red.400' fontWeight='600' mb='25px'>Ticket</Text>
       <GoogleLogin
         clientId={googleClientID}
         buttonText="Login"
