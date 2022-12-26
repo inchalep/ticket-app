@@ -5,15 +5,14 @@ import Navbar from './components/navBar';
 import { gapi } from 'gapi-script';
 import Login from './pages/login';
 import { useSelector } from 'react-redux';
+import { oAuth } from './constants/oAuth';
 function App() {
   const { user } = useSelector(state => state.login);
-  const googleClientID =
-    '1094987803842-lndm8ge3sb7m9ppd2m06as5dk1jcghpm.apps.googleusercontent.com';
 
   useEffect(() => {
     gapi.load('client:auth2', () => {
       gapi.client.init({
-        clientId: googleClientID,
+        clientId: oAuth.CLIENT_ID,
       });
     });
   }, []);

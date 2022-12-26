@@ -2,13 +2,11 @@ import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
+import { oAuth } from '../../constants/oAuth';
 import { userLogin } from '../../redux/slices/login';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const googleClientID =
-    '1094987803842-lndm8ge3sb7m9ppd2m06as5dk1jcghpm.apps.googleusercontent.com';
-
   const responseGoogle = response => {
     dispatch(
       userLogin({
@@ -29,7 +27,7 @@ const Login = () => {
     >
       <Text fontSize='45px' color='red.400' fontWeight='600' mb='25px'>Ticket</Text>
       <GoogleLogin
-        clientId={googleClientID}
+        clientId={oAuth.CLIENT_ID}
         buttonText="Login"
         onSuccess={responseGoogle}
         cookiePolicy={'single_host_origin'}
