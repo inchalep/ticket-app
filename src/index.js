@@ -4,8 +4,6 @@ import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { store } from './redux/store';
-import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorker';
 import { costomTheme } from './styles/theme';
 import { Provider } from 'react-redux'
 
@@ -24,5 +22,3 @@ root.render(
     </ChakraProvider>
   </StrictMode>
 );
-serviceWorker.unregister();
-reportWebVitals();

@@ -7,5 +7,10 @@ export const costomTheme = extendTheme({
       ...globalStyle,
     },
   },
+  colors:{
+    trBg:'#daf1d5',
+    closedTr:'#dddddd',
+    headingBg:'#d6eef8',
+  }
 });
 
